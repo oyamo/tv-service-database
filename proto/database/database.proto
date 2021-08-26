@@ -1,0 +1,42 @@
+syntax = "proto3";
+package database;
+option go_package = "github.com/oyamoh-brian/tv-service-database";
+
+service DataBaseService {
+    rpc GetAllVideos(Category) returns (ResponseVideos);
+    rpc GetAllCategories(GetRequest) returns (ResponseCategories);
+}
+
+message Video {
+    string id = 1;
+    string description = 2;
+    int32 length = 3;
+    string stream_url = 4;
+    string video_thumbnail_url = 5;
+    string video_cover_url = 6;
+    string video_views = 7;
+    string video_likes = 8;
+}
+
+message GetRequest {}
+
+
+message Category{
+    string id = 1;
+    string name = 2;
+    int32 videos_count = 3;
+    string category_thumbnail_url = 4;
+    string category_cover_url = 5;
+}
+
+message ResponseCategories  {
+    int32 status = 1;
+    repeated Category categories = 2;
+    string message  = 3;
+}
+
+message ResponseVideos {
+    int32 status = 1;
+    repeated Video video = 2;
+    string message = 3;
+}
